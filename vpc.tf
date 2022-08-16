@@ -50,4 +50,10 @@ module "private_app" {
 #     avail_zones = "eu-west-1c"
 # }
 
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.elk_vpc.id
 
+  tags = {
+    Name = "internet gateway"
+  }
+}
