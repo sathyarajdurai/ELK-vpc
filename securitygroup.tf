@@ -1,6 +1,6 @@
-resource "aws_security_group" "elk_secruity" {
-  name        = "elk-security"
-  description = "Allow ansible server inbound traffic"
+resource "aws_security_group" "public_secruity" {
+  name        = "public-elks-security"
+  description = "Allow public inbound traffic"
   vpc_id      = aws_vpc.elk_vpc.id
 
   ingress {
@@ -16,15 +16,7 @@ resource "aws_security_group" "elk_secruity" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description      = "Allow port 5601"
-    from_port        = 5601
-    to_port          = 5601
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    cidr_blocks      = ["202.21.42.221/32"]
   }
 
   egress {
@@ -36,6 +28,7 @@ resource "aws_security_group" "elk_secruity" {
   }
 
   tags = {
-    Name = "elk-security"
+    Name = "public-elk-security"
   }
 }
+
